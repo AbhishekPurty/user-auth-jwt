@@ -6,7 +6,7 @@ export default function VerifyEmail() {
   const [message, setMessage] = useState('Loading...');
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
-  // const router = useRouter();
+  const router = useRouter();
   console.log("Token in frontend", token)
 
   useEffect(() => {
