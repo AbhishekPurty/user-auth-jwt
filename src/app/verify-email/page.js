@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function VerifyEmail() {
@@ -38,5 +38,10 @@ export default function VerifyEmail() {
     }
   },[token, router]);
 
-  return <div>{message}</div>;
+  return(
+    <Suspense fallback={<div>{message}</div>}>
+      <div>{message}</div>
+    </Suspense>
+  ) 
+  
 }
