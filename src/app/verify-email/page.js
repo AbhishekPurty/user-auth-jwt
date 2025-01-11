@@ -36,7 +36,7 @@ export default function VerifyEmail() {
         }
       })();
     }
-  },[token]);
+  },[token, router]);
 
   return <div>{message}</div>;
 }
