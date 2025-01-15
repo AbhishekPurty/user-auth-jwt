@@ -33,7 +33,7 @@ export default function Signup() {
         const res = await fetch('/api/send-verification-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email, password }),
         });
     
         if (res.ok) {

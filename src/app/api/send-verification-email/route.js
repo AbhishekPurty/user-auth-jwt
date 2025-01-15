@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import { MongoClient } from 'mongodb';
+import bcrypt from "bcrypt";
 
 const client = new MongoClient(process.env.MONGODB_URI);
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -11,10 +12,11 @@ export async function POST(req) {
   
   if (req.method !== 'POST') return new Response('Method not allowed', {status: 405});
 
-  const { email} = await req.json();
+  const { email, password } = await req.json();
   console.log("the email is", email)
   // console.log("the password is", password)
   if (!email) return new Response('Email is required', { status: 400 });
+  if (!password) return new Response('Password is required', { status: 400});
 
   try {
     await client.connect();
@@ -53,10 +55,11 @@ export async function POST(req) {
       html: `<p>Click <a href="${verificationUrl}">here</a> to verify your email.</p>`,
     });
 
+    const hashedPassword = await bcrypt.hash(password, 10);
     // Save the token in the database (optional: clear existing tokens for this email)
     await usersCollection.insertOne({
       email,
-      // password,
+      password: hashedPassword,
       verificationToken: token,
       tokenExpiresAt: new Date(Date.now() + 3600000),
     });    
