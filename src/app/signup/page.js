@@ -83,10 +83,10 @@ export default function Signup() {
                             <TextBox func={HandleEmailChange} placeholder={'Email'} name={'email'} id={'email'}/>
     
                             {/* Password */}
-                            <input name={'password'} value={password} onChange={(e)=>{setPassword(e.target.value); setMessage("")}} placeholder="Password" className="bg-[#F3F1FF] focus:scale-[1.02] ease-out duration-150" type="password"/>
+                            <input name={'password'} value={password} onChange={(e)=>{setPassword(e.target.value); setMessage("")}} placeholder="Password" className="bg-[#F3F1FF] text-black focus:scale-[1.02] ease-out duration-150" type="password"/>
                             
                             {/* Confirm Password */}
-                            <input name={'password'} style={{outline:password.trim()!==""&&password!==confirmPassword&&"solid 1px red"}} value={confirmPassword} onChange={(e)=>{setConfirmPassword(e.target.value); setMessage("")}} placeholder="Confirm Password" className={`bg-[#F3F1FF] focus:scale-[1.02] ease-out duration-150`} type="password"/>
+                            <input name={'password'} style={{outline:password.trim()!==""&&password!==confirmPassword&&"solid 1px red"}} value={confirmPassword} onChange={(e)=>{setConfirmPassword(e.target.value); setMessage("")}} placeholder="Confirm Password" className={`bg-[#F3F1FF] text-black focus:scale-[1.02] ease-out duration-150`} type="password"/>
                         </div>
     
                         <div className="flex  gap-3 w-full">

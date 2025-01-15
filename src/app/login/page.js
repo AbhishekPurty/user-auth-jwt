@@ -39,7 +39,7 @@ export default function Login(){
                             <TextBox placeholder={'Email'} name={'email'} id={'email'}/>
 
                             {/* Password */}
-                            <input name={'password'} value={password} onChange={(e)=>{setPassword(e.target.value); setWrong(false)}} placeholder="Password" className="bg-[#F3F1FF] focus:scale-[1.02] ease-out duration-150" type="password"/>
+                            <input name={'password'} value={password} onChange={(e)=>{setPassword(e.target.value); setWrong(false)}} placeholder="Password" className="bg-[#F3F1FF] text-black focus:scale-[1.02] ease-out duration-150" type="password"/>
                         </div>
 
                         <div className="flex  gap-3 w-full">
