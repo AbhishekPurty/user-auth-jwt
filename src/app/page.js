@@ -1,19 +1,24 @@
-import Link from "next/link";
+"use client"
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+
+  const router = useRouter();
+
+  async function handleLogout(){
+    await fetch("/api/logout",{
+      method: "POST",
+    });
+    router.push("/login");
+  }
   return (
-    // <div className="flex w-screen h-screen justify-center ">
-    //   <div className="content-center">
-    //     <button className="text-2xl">
-    //       <Link href={"/login"}>
-    //         Login
-    //       </Link>
-    //     </button>
-    //   </div>
-    // </div>
-    <div className="flex justify-center flex-col p-10">
-            <div>
+    
+    <div className="flex flex-col h-screen justify-around p-10">
+            <div className="flex p-4 justify-center">
                 Hurray! You have logged in successfully!
+            </div>
+            <div className="flex align-bottom">
+              <button onClick={handleLogout}>Logout</button>
             </div>
         </div>
   );
