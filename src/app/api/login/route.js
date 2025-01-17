@@ -1,9 +1,11 @@
 import bcrypt from "bcrypt";
 import { MongoClient } from 'mongodb';
-// import jwt from "jsonwebtoken";
+// import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 // import { connectToDatabase } from "./db/mongodb";
 
-// const SECRET = process.env.JWT_SECRET; // Add this in .env.local
+const SECRET = process.env.SECRET_KEY;
+//  // Add this in .env.local
 const client = new MongoClient(process.env.MONGODB_URI);
 const MONGO_DB = process.env.MONGO_DB
 
@@ -37,12 +39,20 @@ export async function POST(req) {
     //   return res.status(401).json({ message: "Invalid credentials." });
     return new Response('Invalid credentials.', {status: 401})
     }
+    if(!user.isVerified){
+      return new Response('User not verified', {status: 403})
+    }
 
     // Generate a JWT token
-    // const token = jwt.sign({ id: user._id, email: user.email }, SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ email: user.email }, SECRET, { expiresIn: "1h" });
 
     // return res.status(200).json({ token });
-    return new Response("Login Successful", {status: 200});
+
+    const cookieValue = token;
+    console.log(cookieValue)
+
+    return new Response("Login Successful",{status: 200, headers:{"Set-Cookie": `userToken=${cookieValue}; HttpOnly; Path=/; Secure`,}});
+    // return NextResponse.json({token}, {status: 200});
   } catch (error) {
     // return res.status(500).json({ message: "Error logging in.", error: error.message });
     return new Response('Error logging in.', {status:500});

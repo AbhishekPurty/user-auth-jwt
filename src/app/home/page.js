@@ -1,9 +1,9 @@
 'use client'
 export default function Home(){
     return(
-        <div className="flex justify-center flex-col p-10">
+        <div className="flex justify-center flex-col p-10 text-white">
             <div>
-                Hurray! You have logged in successfully!
+                kasgjhaj
             </div>
         </div>
     )

@@ -34,11 +34,17 @@ export default function Login(){
             if (res.ok) {
                 setMessage('Login Successful');
                 setTimeout(()=>{
-                    router.push('/home');
+                    router.push('/');
                 },3000);
-              } else {
+              } else if(res.status == 404){
                 console.log(res)
-                setMessage(`Error: Wrong Credentials`);
+                setMessage(`Error: User not found`);
+              } else if(res.status == 401){
+                console.log(res)
+                setMessage(`Error: Wrong Credentials`)
+              } else if(res.status == 403){
+                console.log(res)
+                setMessage(`Error: User not verified`)
               }
 
         } catch (error) {
